@@ -1,7 +1,8 @@
-import type { NextConfig } from "next";
+import { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  // App Router is now stable and enabled by default in modern Next.js versions
+  // No need for experimental.appDir flag anymore
+}
 
-export default nextConfig;
+export default nextConfig
