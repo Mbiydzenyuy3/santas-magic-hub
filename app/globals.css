@@ -19,6 +19,8 @@
   }
 }
 
+/* Dark mode support for accessibility - respects user's system preferences */
+
 body {
   background: var(--background);
   color: var(--foreground);
