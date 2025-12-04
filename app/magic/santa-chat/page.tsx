@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 interface Message {
@@ -15,74 +15,57 @@ export default function SantaChat() {
     {
       id: 1,
       sender: 'santa',
-      text: 'Ho ho ho! 🎅 Welcome, my friend! What would you like to tell Santa today?'
+      text: "Ho ho ho! 🎅 Welcome to Santa's chat! What would you like for Christmas?"
     }
   ])
-
   const [input, setInput] = useState('')
+  const [loading, setLoading] = useState(false)
   const [nextId, setNextId] = useState(2)
-  const nextIdRef = useRef(nextId)
-
-  // Keep the ref in sync with the state
-  useEffect(() => {
-    nextIdRef.current = nextId
-  }, [nextId])
-
-  function handleSend() {
-    if (!input.trim()) return
-
-    const currentId = nextId
-    setNextId((prev) => prev + 1)
-
-    const userMessage: Message = {
-      id: currentId,
-      sender: 'user',
-      text: input.trim()
-    }
-
-    setMessages((prev) => [...prev, userMessage])
-    setInput('')
-
-    // Mock Santa reply
-    setTimeout(() => {
-      const replyId = nextIdRef.current
-      setNextId((prev) => prev + 1)
-
-      const santaReply: Message = {
-        id: replyId,
-        sender: 'santa',
-        text: generateSantaReply(input.trim())
-      }
-      setMessages((prev) => [...prev, santaReply])
-    }, 600)
-  }
 
   useEffect(() => {
+    // Load completed days for the app functionality
     try {
       const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
 
-      const newDay = 2
-
-      if (!stored.includes(newDay)) {
-        const updated = [...stored, newDay]
-        localStorage.setItem('completedDays', JSON.stringify(updated))
+      if (!stored.includes(2)) {
+        localStorage.setItem('completedDays', JSON.stringify([...stored, 2]))
       }
-    } catch (error) {
-      console.error('Failed to update completedDays:', error)
-    }
+    } catch {}
   }, [])
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function generateSantaReply(userText: string) {
-    const cheerfulReplies = [
-      `Ho ho ho! That sounds wonderful! 🎄`,
-      `Oh my candy canes! 🍭 That's delightful!`,
-      `You’ve made Santa’s beard wiggle with joy! 😂`,
-      `Such Christmas spirit! ⭐`,
-      `I’ll add that to my North Pole notes! 📝`
-    ]
+  async function handleSend() {
+    if (!input.trim()) return
 
-    return cheerfulReplies[Math.floor(Math.random() * cheerfulReplies.length)]
+    const userText = input.trim()
+    setInput('')
+
+    const userMessage: Message = {
+      id: nextId,
+      sender: 'user',
+      text: userText
+    }
+    setNextId((prev: number) => prev + 1)
+    setMessages((prev: Message[]) => [...prev, userMessage])
+
+    setLoading(true)
+
+    const res = await fetch('/api/santa', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText })
+    })
+
+    const data = await res.json()
+
+    const santaMessage: Message = {
+      id: nextId + 1,
+      sender: 'santa',
+      text: data.reply
+    }
+
+    setNextId((prev: number) => prev + 1)
+    setMessages((prev: Message[]) => [...prev, santaMessage])
+    setLoading(false)
   }
 
   return (
@@ -98,12 +81,9 @@ export default function SantaChat() {
           />
           <h1 className="text-lg font-semibold">Chat with Santa 🎅</h1>
         </div>
-        <Link
-          href="/magic"
-          className="px-3 py-1 bg-red-700 hover:bg-red-800 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-        >
-          <span>←</span>
-          Back
+
+        <Link href="/magic" className="px-3 py-1 bg-red-700 rounded-lg">
+          ← Back
         </Link>
       </div>
 
@@ -116,8 +96,7 @@ export default function SantaChat() {
             }`}
           >
             <div
-              className={`max-w-[70%] px-4 py-2 rounded-xl shadow 
-              ${
+              className={`max-w-[70%] px-4 py-2 rounded-xl shadow ${
                 msg.sender === 'user'
                   ? 'bg-green-200 text-gray-900'
                   : 'bg-white text-gray-800 border'
@@ -127,20 +106,26 @@ export default function SantaChat() {
             </div>
           </div>
         ))}
-      </div>
 
-      <div className="p-4 flex gap-2 bg-white border-t">
+        {loading && (
+          <div className="flex justify-start">
+            <div className="bg-white border px-4 py-2 rounded-xl text-gray-700 italic animate-pulse">
+              Santa is typing… 🎅
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="p-4 flex gap-2 border-t bg-white">
         <input
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
-          placeholder="Say something to Santa..."
-          aria-label="Message to Santa"
+          className="flex-1 px-3 py-2 border rounded-lg"
+          placeholder="Tell Santa something..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
         />
         <button
           onClick={handleSend}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200"
+          className="px-4 py-2 bg-red-600 text-white rounded-lg"
         >
           Send
         </button>

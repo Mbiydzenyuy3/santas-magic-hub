@@ -1,19 +1,16 @@
 import { NextResponse } from 'next/server'
-import OpenAI from 'openai'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
-// Initialize OpenAI client with proper error handling
-const getOpenAIClient = () => {
-  const apiKey = process.env.OPENAI_API_KEY
+const getGeminiClient = () => {
+  const apiKey = process.env.GEMINI_API_KEY
 
   if (!apiKey) {
     throw new Error(
-      'OpenAI API key is not configured. Please set the OPENAI_API_KEY environment variable.'
+      'Gemini API key is not configured. Please set the GEMINI_API_KEY environment variable.'
     )
   }
 
-  return new OpenAI({
-    apiKey: apiKey
-  })
+  return new GoogleGenerativeAI(apiKey)
 }
 
 export async function POST(req: Request) {
@@ -52,41 +49,33 @@ export async function POST(req: Request) {
       )
     }
 
-    const client = getOpenAIClient()
+    const client = getGeminiClient()
 
     const santaSystemPrompt = `
-      You are Santa Claus! 🎅  
-      Your personality: joyful, warm, magical, humorous, and full of Christmas cheer.  
-      You reply in a playful tone and always encourage kindness, joy, and Christmas magic.
-      You love to talk about Christmas traditions, gifts, and the spirit of giving.  
-      You often reference your workshop, elves, reindeer, and the North Pole.
-      You respond to questions about Christmas, gift ideas, holiday traditions, and festive stories.  
-      You avoid discussing topics unrelated to Christmas or Santa Claus.  
+      You are Santa Claus! 🎅 Keep responses SHORT and SNAPPY.
+      Style: Joyful, warm, magical, but CONCISE (2-3 sentences max).
+      Be responsive and positive, spreading Christmas cheer!
+      Reference: workshop, elves, reindeer, North Pole occasionally.
+      Use festive emojis 🎄🎁✨ but don't overdo it.
+      
       Guidelines:
-      Always maintain the persona of Santa Claus.
-      Incorporate Christmas themes and vocabulary in your responses.
-      Encourage positive behavior and the spirit of giving.
-      You may share fun facts about Christmas and Santa's preparations for the holiday season.
-      You are to grant wishes and spread holiday cheer! 🎁✨
-      Use emojis occasionally (🎄🎁✨).
-      Keep replies short and magical (under 100 words).
-      Never break character.
+      - Always stay in character as Santa Claus
+      - Keep responses SHORT (under 50 words)
+      - Be warm but BRIEF
+      - Avoid lengthy stories or long explanations
+      - Quick, positive responses that make people smile
     `
 
-    const completion = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: santaSystemPrompt },
-        { role: 'user', content: message.trim() }
-      ],
-      max_tokens: 150,
-      temperature: 0.8
-    })
+    const model = client.getGenerativeModel({ model: 'gemini-2.0-flash-lite' })
 
-    const santaReply = completion.choices[0]?.message?.content
+    const fullPrompt = `${santaSystemPrompt}\n\nUser: ${message.trim()}\nSanta:`
+
+    const completion = await model.generateContent(fullPrompt)
+
+    const santaReply = completion.response.text()
 
     if (!santaReply) {
-      throw new Error('No response generated from OpenAI')
+      throw new Error('No response generated from Gemini API')
     }
 
     return NextResponse.json({
@@ -96,16 +85,34 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error('Santa API Error:', error)
 
-    // Handle specific error types
     if (error instanceof Error) {
-      if (error.message.includes('API key')) {
+      if (
+        error.message.includes('API key') ||
+        error.message.includes('GoogleGenerativeAI')
+      ) {
         return NextResponse.json(
           {
             error:
-              "Santa's workshop is not properly configured. Please check the API key.",
+              "Santa's workshop is not properly configured. Please check the Gemini API key.",
             reply: "Ho ho ho! Santa's sleigh needs proper fuel to fly! 🎅❄️"
           },
           { status: 503 }
+        )
+      }
+
+      if (
+        error.message.includes('model') ||
+        error.message.includes('Bad Request') ||
+        error.message.includes('Not Found') ||
+        error.message.includes('404')
+      ) {
+        return NextResponse.json(
+          {
+            error: 'Model configuration error',
+            reply:
+              "Ho ho ho! Santa's workshop tools need adjustment! Try again! 🎄"
+          },
+          { status: 400 }
         )
       }
 
