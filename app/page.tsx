@@ -1,9 +1,13 @@
+'use client'
+
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Snowfall from '../components/Snowfall'
 import Link from 'next/link'
 
 export default function LandingPage() {
+  const liveDays = [1, 2]
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Snowfall />
@@ -27,21 +31,29 @@ export default function LandingPage() {
       </section>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-20 max-w-5xl mx-auto">
-        {Array.from({ length: 22 }).map((_, i) => (
-          <div
-            key={i}
-            className={`p-6 rounded-xl border shadow-sm text-center transition ${
-              i === 0
-                ? 'bg-green-100 border-green-400 shadow-green-200'
-                : 'bg-white border-gray-200 opacity-50'
-            }`}
-          >
-            <p className="font-semibold text-gray-900">Day {i + 1}</p>
-            <p className="text-sm text-gray-700 mt-1">
-              {i === 0 ? '🚀 Launch Day' : 'Coming soon...'}
-            </p>
-          </div>
-        ))}
+        {Array.from({ length: 22 }).map((_, i) => {
+          const dayNumber = i + 1
+          const isLive = liveDays.includes(dayNumber)
+          return (
+            <div
+              key={i}
+              className={`p-6 rounded-xl border shadow-sm text-center transition ${
+                isLive
+                  ? 'bg-green-100 border-green-400 shadow-green-200'
+                  : 'bg-white border-gray-200'
+              }`}
+            >
+              <p className="font-semibold text-gray-900">Day {dayNumber}</p>
+              <p className="text-sm text-gray-700 mt-1">
+                {dayNumber === 1
+                  ? '🚀 Launch Day'
+                  : isLive
+                  ? '🔴 Live Now'
+                  : 'Coming soon...'}
+              </p>
+            </div>
+          )
+        })}
       </section>
 
       <Footer />

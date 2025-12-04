@@ -10,8 +10,8 @@ export default function NotFoundPage() {
 
         <p className="text-gray-700 mb-8 leading-relaxed">
           Santa&apos;s workshop is still preparing this special feature.
-          We&apos;re working around the clock to bring you the most magical
-          Christmas experience
+          We&apos;re working towards bringing you the most magical Christmas
+          experience
         </p>
 
         <div className="space-y-4">
