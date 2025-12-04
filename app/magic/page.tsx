@@ -2,7 +2,17 @@ import Link from 'next/link'
 
 export default function MagicHub() {
   return (
-    <div className="max-w-4xl mx-auto py-20 text-center bg-white min-h-screen">
+    <div className="h-screen max-w-4xl mx-auto py-20 text-center bg-white min-h-screen">
+      <div className="top-0 left-8 p-4 absolute">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
+        >
+          <span>←</span>
+          Back to Home
+        </Link>
+      </div>
+
       <h1 className="text-4xl font-bold text-green-800 mb-6">
         🎁 Welcome to the Magic Hub
       </h1>
