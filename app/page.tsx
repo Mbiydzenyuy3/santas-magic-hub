@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Snowfall from '../components/Snowfall'
+import Link from 'next/link'
 
 export default function LandingPage() {
   return (
@@ -17,9 +18,12 @@ export default function LandingPage() {
           from Dec 3 Today → Dec 25.
         </p>
 
-        <button className="mt-6 bg-red-600 text-white px-6 py-3 rounded-xl shadow-lg hover:bg-red-700 transition">
+        <Link
+          href="/magic"
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow"
+        >
           Enter the Magic Hub
-        </button>
+        </Link>
       </section>
 
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-20 max-w-5xl mx-auto">
