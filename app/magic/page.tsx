@@ -12,7 +12,6 @@ export default function MagicHub() {
           Back to Home
         </Link>
       </div>
-
       <h1 className="text-4xl font-bold text-green-800 mb-6">
         🎁 Welcome to the Magic Hub
       </h1>
