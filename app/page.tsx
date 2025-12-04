@@ -4,9 +4,10 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Snowfall from '../components/Snowfall'
 import Link from 'next/link'
+import { days } from '../constant/challengeDays'
 
 export default function LandingPage() {
-  const liveDays = [1, 2]
+  const liveDays = days.filter((d) => d.live).map((d) => d.day)
 
   return (
     <div className="min-h-screen flex flex-col bg-white">

@@ -14,14 +14,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ffffff; /* Force white background even in dark mode */
-    --foreground: #171717;
+    --background: #0a0a0a;
+    --foreground: #ededed;
   }
 }
 
 body {
-  background: #ffffff; /* Ensure white background */
-  color: #171717; /* Ensure dark text for accessibility */
+  background: #ffffff;
+  color: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
 

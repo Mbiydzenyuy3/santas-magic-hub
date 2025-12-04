@@ -2,7 +2,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-// import Image from 'next/image'
+import Link from 'next/link'
 
 interface Message {
   id: number
@@ -58,13 +58,17 @@ export default function SantaChat() {
   }
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
+    try {
+      const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
 
-    const newDay = 2
+      const newDay = 2
 
-    if (!stored.includes(newDay)) {
-      const updated = [...stored, newDay]
-      localStorage.setItem('completedDays', JSON.stringify(updated))
+      if (!stored.includes(newDay)) {
+        const updated = [...stored, newDay]
+        localStorage.setItem('completedDays', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('Failed to update completedDays:', error)
     }
   }, [])
 
@@ -84,14 +88,23 @@ export default function SantaChat() {
   return (
     <div className="flex flex-col h-screen bg-white relative">
       <div className="p-4 bg-red-600 text-white flex items-center gap-3 shadow-md">
-        <img
-          src="/images/santa.jpg"
-          width={40}
-          height={40}
-          alt="Santa"
-          className="rounded-full"
-        />
-        <h1 className="text-lg font-semibold">Chat with Santa 🎅</h1>
+        <div className="flex items-center gap-3 flex-1">
+          <img
+            src="/images/santa.jpg"
+            width={40}
+            height={40}
+            alt="Santa"
+            className="rounded-full"
+          />
+          <h1 className="text-lg font-semibold">Chat with Santa 🎅</h1>
+        </div>
+        <Link
+          href="/magic"
+          className="px-3 py-1 bg-red-700 hover:bg-red-800 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-1"
+        >
+          <span>←</span>
+          Back
+        </Link>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
