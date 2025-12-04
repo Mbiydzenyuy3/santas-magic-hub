@@ -1,7 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 interface Message {
   id: number
@@ -56,6 +57,17 @@ export default function SantaChat() {
     }, 600)
   }
 
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
+
+    const newDay = 2
+
+    if (!stored.includes(newDay)) {
+      const updated = [...stored, newDay]
+      localStorage.setItem('completedDays', JSON.stringify(updated))
+    }
+  }, [])
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function generateSantaReply(userText: string) {
     const cheerfulReplies = [
@@ -70,10 +82,10 @@ export default function SantaChat() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#fff9f2] relative">
+    <div className="flex flex-col h-screen bg-white relative">
       <div className="p-4 bg-red-600 text-white flex items-center gap-3 shadow-md">
-        <Image
-          src="/santa.png"
+        <img
+          src="/images/santa.jpg"
           width={40}
           height={40}
           alt="Santa"
@@ -106,7 +118,7 @@ export default function SantaChat() {
 
       <div className="p-4 flex gap-2 bg-white border-t">
         <input
-          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="flex-1 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-black"
           placeholder="Say something to Santa..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -114,7 +126,7 @@ export default function SantaChat() {
         />
         <button
           onClick={handleSend}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700"
+          className="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200"
         >
           Send
         </button>

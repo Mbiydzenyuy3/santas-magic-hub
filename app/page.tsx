@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFAF4]">
+    <div className="min-h-screen flex flex-col bg-white">
       <Snowfall />
       <Navbar />
 
@@ -13,14 +13,14 @@ export default function LandingPage() {
         <h1 className="text-5xl font-bold text-green-800 mb-4">
           🎄 Santa’s Magic Hub
         </h1>
-        <p className="text-lg text-gray-700 max-w-xl">
+        <p className="text-lg text-gray-900 max-w-xl font-medium mb-4">
           22 Features in 22 Days. Pure Christmas Magic. A daily build challenge
           from Dec 3 Today → Dec 25.
         </p>
 
         <Link
           href="/magic"
-          className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow"
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 mt-6 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 font-semibold"
         >
           Enter the Magic Hub
         </Link>
@@ -36,8 +36,8 @@ export default function LandingPage() {
                 : 'bg-white border-gray-200 opacity-50'
             }`}
           >
-            <p className="font-semibold text-gray-700">Day {i + 1}</p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="font-semibold text-gray-900">Day {i + 1}</p>
+            <p className="text-sm text-gray-700 mt-1">
               {i === 0 ? '🚀 Launch Day' : 'Coming soon...'}
             </p>
           </div>
