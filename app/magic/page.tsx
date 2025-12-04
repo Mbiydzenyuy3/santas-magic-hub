@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function MagicHub() {
   return (
     <div className="max-w-4xl mx-auto py-20 text-center bg-white min-h-screen">
@@ -9,7 +11,7 @@ export default function MagicHub() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <a
+        <Link
           href="/magic/santa-chat"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
@@ -19,43 +21,43 @@ export default function MagicHub() {
           <p className="text-xs text-gray-700 mt-2 font-medium">
             Day 2 unlocked
           </p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/magic/countdown"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
           <div className="text-gray-900 font-semibold text-lg">
             ⏳ Christmas Countdown
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/magic/elf-name"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
           <div className="text-gray-900 font-semibold text-lg">
             🧝‍♂️ Elf Name Generator
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/magic/greeting-cards"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
           <div className="text-gray-900 font-semibold text-lg">
             💌 Greeting Card Maker
           </div>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/magic/tree-decorator"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
           <div className="text-gray-900 font-semibold text-lg">
             🎄 Tree Decorator
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   )

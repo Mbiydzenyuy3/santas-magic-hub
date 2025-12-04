@@ -2,7 +2,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-// import Image from 'next/image'
 
 interface Message {
   id: number
@@ -58,13 +57,17 @@ export default function SantaChat() {
   }
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
+    try {
+      const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
 
-    const newDay = 2
+      const newDay = 2
 
-    if (!stored.includes(newDay)) {
-      const updated = [...stored, newDay]
-      localStorage.setItem('completedDays', JSON.stringify(updated))
+      if (!stored.includes(newDay)) {
+        const updated = [...stored, newDay]
+        localStorage.setItem('completedDays', JSON.stringify(updated))
+      }
+    } catch (error) {
+      console.error('Failed to update completedDays:', error)
     }
   }, [])
 
