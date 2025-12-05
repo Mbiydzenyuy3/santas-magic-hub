@@ -19,7 +19,11 @@ export default function ChristmasCountdown() {
 
   function calculateTimeLeft() {
     const now = new Date()
-    const christmas = new Date(now.getFullYear(), 11, 25)
+    let christmas = new Date(now.getFullYear(), 11, 25)
+
+    if (now > christmas) {
+      christmas = new Date(now.getFullYear() + 1, 11, 25)
+    }
 
     const diff = christmas.getTime() - now.getTime()
 

@@ -23,7 +23,6 @@ export default function SantaChat() {
   const [nextId, setNextId] = useState(2)
 
   useEffect(() => {
-    // Load completed days for the app functionality
     try {
       const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
 
@@ -49,25 +48,36 @@ export default function SantaChat() {
 
     setLoading(true)
 
-    const res = await fetch('/api/santa', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userText })
-    })
-
-    const data = await res.json()
-
-    const santaMessage: Message = {
-      id: nextId + 1,
-      sender: 'santa',
-      text: data.reply
+    try {
+      const res = await fetch('/api/santa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userText })
+      })
+      if (!res.ok) {
+        throw new Error('Failed to get response from Santa')
+      }
+      const data = await res.json()
+      const santaMessage: Message = {
+        id: nextId + 1,
+        sender: 'santa',
+        text: data.reply || 'Ho ho ho! Santa is busy right now. Try again!'
+      }
+      setNextId((prev: number) => prev + 1)
+      setMessages((prev: Message[]) => [...prev, santaMessage])
+    } catch (err) {
+      console.error('Santa chat error:', err)
+      const errorMessage: Message = {
+        id: nextId + 1,
+        sender: 'santa',
+        text: "Ho ho ho! 🎅 Santa's workshop is having some trouble. Please try again!"
+      }
+      setNextId((prev: number) => prev + 1)
+      setMessages((prev: Message[]) => [...prev, errorMessage])
+    } finally {
+      setLoading(false)
     }
-
-    setNextId((prev: number) => prev + 1)
-    setMessages((prev: Message[]) => [...prev, santaMessage])
-    setLoading(false)
   }
-
   return (
     <div className="flex flex-col h-screen bg-white relative">
       <div className="p-4 bg-red-600 text-white flex items-center gap-3 shadow-md">
