@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       - Quick, positive responses that make people smile
     `
 
-    const model = client.getGenerativeModel({ model: 'gemini-2.0-flash-lite' })
+    const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
     const fullPrompt = `${santaSystemPrompt}\n\nUser: ${message.trim()}\nSanta:`
 
