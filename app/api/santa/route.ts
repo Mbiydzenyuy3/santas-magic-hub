@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
-import { GoogleGenerativeAI } from '@google/generative-ai'
 
-const getGeminiClient = () => {
+async function getGeminiClient() {
   const apiKey = process.env.GEMINI_API_KEY
 
   if (!apiKey) {
@@ -10,16 +9,14 @@ const getGeminiClient = () => {
     )
   }
 
+  const { GoogleGenerativeAI } = await import('@google/generative-ai')
   return new GoogleGenerativeAI(apiKey)
 }
 
 export async function POST(req: Request) {
   try {
-    if (req.method !== 'POST') {
-      return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
-    }
-
     let requestData: { message?: string }
+
     try {
       requestData = await req.json()
     } catch {
@@ -31,13 +28,11 @@ export async function POST(req: Request) {
 
     const { message } = requestData
 
-    if (
-      !message ||
-      typeof message !== 'string' ||
-      message.trim().length === 0
-    ) {
+    if (!message || typeof message !== 'string' || !message.trim()) {
       return NextResponse.json(
-        { error: 'Message is required and must be a non-empty string' },
+        {
+          error: 'Message is required and must be a non-empty string'
+        },
         { status: 400 }
       )
     }
@@ -49,92 +44,80 @@ export async function POST(req: Request) {
       )
     }
 
-    const client = getGeminiClient()
+    const client = await getGeminiClient()
 
-    const santaSystemPrompt = `
+    const model = client.getGenerativeModel({
+      model: 'gemini-2.0-flash-lite'
+    })
+
+    const santaPrompt = `
       You are Santa Claus! 🎅 Keep responses SHORT and SNAPPY.
-      Style: Joyful, warm, magical, but CONCISE (2-3 sentences max).
-      Be responsive and positive, spreading Christmas cheer!
-      Reference: workshop, elves, reindeer, North Pole occasionally.
-      Use festive emojis 🎄🎁✨ but don't overdo it.
-      
-      Guidelines:
-      - Always stay in character as Santa Claus
-      - Keep responses SHORT (under 50 words)
-      - Be warm but BRIEF
-      - Avoid lengthy stories or long explanations
-      - Quick, positive responses that make people smile
+      Warm, magical, fun, and under 50 words.
+      Add light festive emojis like 🎄🎁✨.
+      Stay in character as Santa.
     `
 
-    const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' })
+    const finalPrompt = `${santaPrompt}\n\nUser: ${message.trim()}\nSanta:`
 
-    const fullPrompt = `${santaSystemPrompt}\n\nUser: ${message.trim()}\nSanta:`
-
-    const completion = await model.generateContent(fullPrompt)
-
-    const santaReply = completion.response.text()
+    const completion = await model.generateContent(finalPrompt)
+    const santaReply = completion.response?.text()?.trim()
 
     if (!santaReply) {
       throw new Error('No response generated from Gemini API')
     }
 
     return NextResponse.json({
-      reply: santaReply.trim(),
+      reply: santaReply,
       success: true
     })
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     console.error('Santa API Error:', error)
 
-    if (error instanceof Error) {
-      if (
-        error.message.includes('API key') ||
-        error.message.includes('GoogleGenerativeAI')
-      ) {
-        return NextResponse.json(
-          {
-            error:
-              "Santa's workshop is not properly configured. Please check the Gemini API key.",
-            reply: "Ho ho ho! Santa's sleigh needs proper fuel to fly! 🎅❄️"
-          },
-          { status: 503 }
-        )
-      }
+    // Missing API key
+    if (error.message?.includes('API key')) {
+      return NextResponse.json(
+        {
+          error: "Santa's workshop API key is missing.",
+          reply: 'Ho ho ho! Santa needs his magic key to reply! 🎅🔑'
+        },
+        { status: 503 }
+      )
+    }
 
-      if (
-        error.message.includes('model') ||
-        error.message.includes('Bad Request') ||
-        error.message.includes('Not Found') ||
-        error.message.includes('404')
-      ) {
-        return NextResponse.json(
-          {
-            error: 'Model configuration error',
-            reply:
-              "Ho ho ho! Santa's workshop tools need adjustment! Try again! 🎄"
-          },
-          { status: 400 }
-        )
-      }
+    if (error.message?.includes('model')) {
+      return NextResponse.json(
+        {
+          error: 'Model configuration error',
+          reply: "Ho ho ho! Santa's model is unavailable! Try again shortly! 🎄"
+        },
+        { status: 400 }
+      )
+    }
 
-      if (error.message.includes('rate limit')) {
-        return NextResponse.json(
-          {
-            error: 'Rate limit exceeded',
-            reply:
-              "Ho ho ho! Santa's workshop is getting too many requests! Please wait a moment! 🎄"
-          },
-          { status: 429 }
-        )
-      }
+    if (error.message?.includes('rate')) {
+      return NextResponse.json(
+        {
+          error: 'Rate limit reached',
+          reply:
+            'Ho ho ho! Too many requests! Santa needs a moment to breathe 🎅✨'
+        },
+        { status: 429 }
+      )
     }
 
     return NextResponse.json(
       {
         error: 'Internal server error',
-        reply:
-          "Ho ho ho! Santa's workshop is a bit frozen right now. Try again soon! ❄🎅"
+        reply: "Ho ho ho! Santa's workshop is a bit frozen! ❄️ Try later! 🎅"
       },
       { status: 500 }
     )
   }
+}
+
+export function GET() {
+  return NextResponse.json({
+    status: 'Santa API is running 🎅 Send a POST request to chat!'
+  })
 }

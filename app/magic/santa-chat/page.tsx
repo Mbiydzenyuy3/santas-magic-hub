@@ -18,14 +18,14 @@ export default function SantaChat() {
       text: "Ho ho ho! 🎅 Welcome to Santa's chat! What would you like for Christmas?"
     }
   ])
+
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [nextId, setNextId] = useState(2)
+  const [msgCounter, setMsgCounter] = useState(2)
 
   useEffect(() => {
     try {
       const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
-
       if (!stored.includes(2)) {
         localStorage.setItem('completedDays', JSON.stringify([...stored, 2]))
       }
@@ -33,53 +33,59 @@ export default function SantaChat() {
   }, [])
 
   async function handleSend() {
-    if (!input.trim()) return
-
-    const userText = input.trim()
-    setInput('')
+    const text = input.trim()
+    if (!text) return
 
     const userMessage: Message = {
-      id: nextId,
+      id: msgCounter,
       sender: 'user',
-      text: userText
+      text
     }
-    setNextId((prev: number) => prev + 1)
-    setMessages((prev: Message[]) => [...prev, userMessage])
 
+    setMessages((prev) => [...prev, userMessage])
+    setMsgCounter((prev) => prev + 1)
+    setInput('')
     setLoading(true)
 
     try {
-      const res = await fetch('/api/santa', {
+      const response = await fetch('/api/santa', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userText })
+        body: JSON.stringify({ message: text })
       })
-      if (!res.ok) {
-        throw new Error('Failed to get response from Santa')
-      }
-      const data = await res.json()
+
+      const data = await response.json()
+
+      const santaReply =
+        data.reply ??
+        "Ho ho ho! 🎅 Santa's workshop is busy right now. Try again shortly!"
+
       const santaMessage: Message = {
-        id: nextId + 1,
+        id: msgCounter + 1,
         sender: 'santa',
-        text: data.reply || 'Ho ho ho! Santa is busy right now. Try again!'
+        text: santaReply
       }
-      setNextId((prev: number) => prev + 1)
-      setMessages((prev: Message[]) => [...prev, santaMessage])
-    } catch (err) {
-      console.error('Santa chat error:', err)
+
+      setMessages((prev) => [...prev, santaMessage])
+      setMsgCounter((prev) => prev + 1)
+    } catch (e) {
+      console.error('Santa chat error:', e)
+
       const errorMessage: Message = {
-        id: nextId + 1,
+        id: msgCounter + 1,
         sender: 'santa',
-        text: "Ho ho ho! 🎅 Santa's workshop is having some trouble. Please try again!"
+        text: "Ho ho ho! 🎅 Santa's workshop is having trouble connecting. Please try again!"
       }
-      setNextId((prev: number) => prev + 1)
-      setMessages((prev: Message[]) => [...prev, errorMessage])
+
+      setMessages((prev) => [...prev, errorMessage])
+      setMsgCounter((prev) => prev + 1)
     } finally {
       setLoading(false)
     }
   }
+
   return (
-    <div className="flex flex-col h-screen bg-white relative">
+    <div className="flex flex-col h-screen bg-white">
       <div className="p-4 bg-red-600 text-white flex items-center gap-3 shadow-md">
         <div className="flex items-center gap-3 flex-1">
           <img
@@ -125,6 +131,7 @@ export default function SantaChat() {
           </div>
         )}
       </div>
+
       <div className="p-4 flex gap-2 border-t bg-white">
         <input
           className="flex-1 px-3 py-2 border rounded-lg"
@@ -133,6 +140,7 @@ export default function SantaChat() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
         />
+
         <button
           onClick={handleSend}
           className="px-4 py-2 bg-red-600 text-white rounded-lg"
