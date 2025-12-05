@@ -79,7 +79,7 @@ export default function SantaChat() {
             alt="Santa"
             className="rounded-full"
           />
-          <h1 className="text-lg font-semibold">Chat with Santa 🎅</h1>
+          <h1 className="text-lg font-semibold">Chat with Santa</h1>
         </div>
 
         <Link href="/magic" className="px-3 py-1 bg-red-700 rounded-lg">
