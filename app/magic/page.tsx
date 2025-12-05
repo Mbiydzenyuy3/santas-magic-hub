@@ -6,7 +6,7 @@ export default function MagicHub() {
       <div className="top-0 left-8 p-4 absolute">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-red-200 hover:bg-red-100 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
         >
           <span>←</span>
           Back to Home
@@ -39,6 +39,9 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             ⏳ Christmas Countdown
           </div>
+          <p className="text-xs text-gray-700 mt-2 font-medium">
+            Day 3 unlocked
+          </p>
         </Link>
 
         <Link
