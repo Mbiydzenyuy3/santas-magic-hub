@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { christmasQuotes } from '@/lib/christmasQuotes'
 import Snowfall from '@/components/Snowfall'
 import Link from 'next/link'
@@ -10,7 +10,7 @@ export default function QuotesPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       const index = Math.floor(Math.random() * christmasQuotes.length)
       setRandomQuote(christmasQuotes[index])
       setLoading(false)
@@ -29,16 +29,29 @@ export default function QuotesPage() {
     } catch (err) {
       console.error('Failed to update completedDays:', err)
     }
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
   }, [])
 
   const generateRandomQuote = () => {
-    setLoading(true)
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      setLoading(true)
 
-    setTimeout(() => {
-      const index = Math.floor(Math.random() * christmasQuotes.length)
-      setRandomQuote(christmasQuotes[index])
-      setLoading(false)
-    }, 1300)
+      timeoutRef.current = setTimeout(() => {
+        const index = Math.floor(Math.random() * christmasQuotes.length)
+        setRandomQuote(christmasQuotes[index])
+        setLoading(false)
+      }, 1300)
+    }
   }
 
   return (
