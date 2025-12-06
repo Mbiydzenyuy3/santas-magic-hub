@@ -42,16 +42,14 @@ export default function QuotesPage() {
   }, [])
 
   const generateRandomQuote = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      setLoading(true)
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setLoading(true)
 
-      timeoutRef.current = setTimeout(() => {
-        const index = Math.floor(Math.random() * christmasQuotes.length)
-        setRandomQuote(christmasQuotes[index])
-        setLoading(false)
-      }, 1300)
-    }
+    timeoutRef.current = setTimeout(() => {
+      const index = Math.floor(Math.random() * christmasQuotes.length)
+      setRandomQuote(christmasQuotes[index])
+      setLoading(false)
+    }, 1300)
   }
 
   return (
