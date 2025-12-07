@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { ChristmasJokes } from '@/lib/jokes'
+import Link from 'next/link'
 
 export default function JokesPage() {
   const [joke, setJoke] = useState<string>(() => {
@@ -40,6 +41,12 @@ export default function JokesPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-red-50 relative">
+      <Link
+        href="/magic"
+        className="absolute top-2 left-8 inline-flex items-center gap-2 px-4 py-2 bg-red-200 hover:bg-red-100 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
+      >
+        ← Back
+      </Link>
       <h1 className="text-3xl font-bold text-red-700 mb-6">
         🎅 Santa’s Christmas Joke Generator
       </h1>
