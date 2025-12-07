@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChristmasJokes = [
+export const ChristmasJokes = [
   'Why did Santa go to school? To improve his elf-esteem!',
 
   'What do you call a frog hanging from the ceiling on Christmas? Mistle-toad.',
