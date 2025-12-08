@@ -50,7 +50,7 @@ export default function ElfNamePage() {
 
       {loading && (
         <div className="text-lg text-red-600 animate-pulse">
-          Crafting your magical elf identity... 🎁✨
+          Crafting your magical elf identity... ✨
         </div>
       )}
 
@@ -68,7 +68,7 @@ export default function ElfNamePage() {
         onClick={generateElfName}
         className="mt-8 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow"
       >
-        Generate My Elf Name ✨
+        Generate My Elf Name
       </button>
     </div>
   )
