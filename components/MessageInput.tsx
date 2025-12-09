@@ -36,7 +36,7 @@ export default function MessageInput({
             : 'Generate a random Christmas message'
         }
       >
-        {isCustomMessage ? 'Message Locked ✍️' : 'Generate message 🎁'}
+        {isCustomMessage ? 'Message Locked ✍️' : 'Generate message'}
       </button>
     </div>
   )
