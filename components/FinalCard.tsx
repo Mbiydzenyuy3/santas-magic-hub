@@ -14,7 +14,7 @@ export default function FinalCard({ mood, message, cardRef }: FinalCardProps) {
   return (
     <div
       ref={cardRef}
-      className={`p-8 rounded-xl shadow-xl w-full max-w-lg mx-auto ${style.bg} ${style.font} transition-all duration-500`}
+      className={`p-8 rounded-xl shadow-xl w-full min-w-[400px] max-w-[600px] mx-auto ${style.bg} ${style.font} transition-all duration-500`}
     >
       <div className="text-4xl mb-3 flex gap-2 justify-center">
         {style.decorations.map((d, i) => (
