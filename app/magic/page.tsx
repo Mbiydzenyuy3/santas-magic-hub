@@ -86,6 +86,9 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             💌 Greeting Card Maker
           </div>
+          <p className="text-xs text-gray-700 mt-2 font-medium">
+            Day 7 unlocked
+          </p>
         </Link>
 
         <Link

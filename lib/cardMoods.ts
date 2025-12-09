@@ -1,4 +1,12 @@
-export const cardMoods = {
+export interface CardMood {
+  name: string
+  bg: string
+  font: string
+  accent: string
+  decorations: string[]
+}
+
+export const cardMoods: Record<string, CardMood> = {
   cozy: {
     name: 'Warm & Cozy 🔥',
     bg: 'bg-gradient-to-br from-red-200 to-yellow-100',
@@ -35,3 +43,5 @@ export const cardMoods = {
     decorations: ['🎄', '🎁', '⭐']
   }
 }
+
+export type Mood = keyof typeof cardMoods

@@ -5,7 +5,20 @@ export const days = [
   { day: 4, name: 'Christmas Quotes', live: true },
   { day: 5, name: 'Christmas Joke Generator', live: true },
   { day: 6, name: 'Elf Name Generator', live: true },
-  { day: 7, name: 'Greeting Card Maker', live: false },
-  { day: 8, name: 'Tree Decorator', live: false }
+  { day: 7, name: 'Greeting Card Maker', live: true },
+  { day: 8, name: 'Tree Decorator', live: false },
+  { day: 9, name: 'Gift Suggestion', live: false },
+  { day: 10, name: 'Holiday Recipe Finder', live: false },
+  { day: 11, name: 'Christmas Movie Recommender', live: false },
+  { day: 12, name: 'Festive Playlist Generator', live: false },
+  { day: 13, name: 'Virtual Snow Globe', live: false },
+  { day: 14, name: 'Holiday Light Simulator', live: false },
+  { day: 15, name: 'Christmas Trivia Game', live: false },
+  { day: 16, name: 'Santa Tracker', live: false },
+  { day: 17, name: 'Winter Wallpaper Generator', live: false },
+  { day: 18, name: 'Holiday Countdown Timer', live: false },
+  { day: 19, name: 'Christmas Card Sender', live: false },
+  { day: 20, name: 'Festive Photo Booth', live: false },
+  { day: 21, name: 'New Year Resolution Helper', live: false },
+  { day: 22, name: 'Year in Review Generator', live: false }
 ]
-
