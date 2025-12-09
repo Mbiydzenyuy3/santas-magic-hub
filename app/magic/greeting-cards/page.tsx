@@ -47,14 +47,14 @@ export default function GreetingCardsPage() {
   }, [])
 
   return (
-    <div className="min-h-screen p-6 max-w-3xl mx-auto text-center relative">
+    <div className="min-h-screen p-6 max-w-3xl mx-auto text-center">
       <Link
         href="/magic"
-        className="absolute top-2 -left-64 mb-20 inline-flex items-center gap-2 px-4 py-2 bg-red-100 hover:bg-red-50 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
+        className="lg:absolute lg:top-2 lg:-left-64 inline-flex items-center gap-2 px-4 py-2 mb-6 bg-red-100 hover:bg-red-50 text-gray-700 rounded-lg transition-colors duration-200 font-medium"
       >
         ← Back
       </Link>
-      <h1 className="text-3xl font-bold text-red-600 mt-20 mb-6">
+      <h1 className="text-3xl font-bold text-red-600 mb-6">
         🎨 Christmas Card Maker 🎁
       </h1>
       <p className="mb-6 mt-4 text-gray-700">

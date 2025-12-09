@@ -10,7 +10,6 @@ declare module 'html-to-image' {
     skipAutoScale?: boolean
     cacheBust?: boolean
     imagePlaceholder?: string
-    pixelRatio?: number
   }
 
   export interface ToSvgOptions {

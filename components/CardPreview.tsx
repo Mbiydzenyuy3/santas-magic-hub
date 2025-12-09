@@ -1,10 +1,8 @@
 'use client'
 
 import { useRef, useState } from 'react'
-import { toPng } from 'html-to-image'
 import { Mood } from '@/lib/cardMoods'
 import FinalCard from './FinalCard'
-import ElfBuilderAnimation from './ElfBuilderAnimation'
 
 interface CardPreviewProps {
   mood: Mood | null
@@ -12,15 +10,8 @@ interface CardPreviewProps {
 }
 
 export default function CardPreview({ mood, message }: CardPreviewProps) {
-  const [building, setBuilding] = useState(false)
   const [downloading, setDownloading] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleGenerate = async () => {
-    setBuilding(true)
-    setTimeout(() => setBuilding(false), 1500)
-  }
 
   const downloadImage = async () => {
     if (!cardRef.current) {
@@ -31,15 +22,18 @@ export default function CardPreview({ mood, message }: CardPreviewProps) {
     setDownloading(true)
 
     try {
+      // Dynamically import html-to-image to avoid SSR bundle bloat
+      const { toPng } = await import('html-to-image')
+
       // Get the actual dimensions of the card
       const cardElement = cardRef.current
       const rect = cardElement.getBoundingClientRect()
 
       // Ensure the card is fully visible before capturing
-      cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      cardElement.scrollIntoView({ behavior: 'instant', block: 'center' })
 
       // Wait a bit for any animations to complete
-      await new Promise((resolve) => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 500))
 
       const dataUrl = await toPng(cardElement, {
         quality: 1.0,
@@ -51,10 +45,6 @@ export default function CardPreview({ mood, message }: CardPreviewProps) {
           boxSizing: 'content-box',
           backgroundColor: 'white',
           borderRadius: '12px'
-        },
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        filter: (node) => {
-          return true
         },
         cacheBust: true,
         backgroundColor: '#ffffff'
@@ -81,32 +71,27 @@ export default function CardPreview({ mood, message }: CardPreviewProps) {
 
   return (
     <div className="w-full flex flex-col items-center mt-6">
-      {building ? (
-        <ElfBuilderAnimation />
-      ) : (
-        mood &&
-        message && (
-          <>
-            <div className="mt-6 w-full">
-              <FinalCard mood={mood} message={message} cardRef={cardRef} />
-            </div>
+      {mood && message && (
+        <>
+          <div className="mt-6 w-full">
+            <FinalCard mood={mood} message={message} cardRef={cardRef} />
+          </div>
 
-            <button
-              onClick={downloadImage}
-              disabled={downloading}
-              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
-            >
-              {downloading ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  Generating...
-                </>
-              ) : (
-                '⬇️ Download PNG'
-              )}
-            </button>
-          </>
-        )
+          <button
+            onClick={downloadImage}
+            disabled={downloading}
+            className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {downloading ? (
+              <>
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                Generating...
+              </>
+            ) : (
+              '⬇️ Download PNG'
+            )}
+          </button>
+        </>
       )}
     </div>
   )
