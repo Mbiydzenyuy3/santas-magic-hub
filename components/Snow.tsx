@@ -10,6 +10,7 @@ export default function RealSnowfall() {
     const ctx = canvas.getContext('2d')!
     let width = (canvas.width = window.innerWidth)
     let height = (canvas.height = window.innerHeight)
+    let animationId: number
 
     const snowflakes = Array.from({ length: 120 }).map(() => ({
       x: Math.random() * width,
@@ -44,14 +45,19 @@ export default function RealSnowfall() {
 
     function animate() {
       draw()
-      requestAnimationFrame(animate)
+      animationId = requestAnimationFrame(animate)
     }
     animate()
 
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       width = canvas.width = window.innerWidth
       height = canvas.height = window.innerHeight
-    })
+    }
+    window.addEventListener('resize', handleResize)
+    return () => {
+      cancelAnimationFrame(animationId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   return (
