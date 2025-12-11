@@ -103,11 +103,11 @@ export default function MagicHub() {
         </Link>
 
         <Link
-          href="/magic/ornament-generator"
+          href="/magic/naughty-or-nice"
           className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
         >
           <div className="text-gray-900 font-semibold text-lg">
-            Santa’s “Naughty or Nice” Rating Tool
+            ⭐⭐⭐ Santa’s Names Rating Tool
           </div>
           <p className="text-xs text-gray-700 mt-2 font-medium">
             Day 9 unlocked

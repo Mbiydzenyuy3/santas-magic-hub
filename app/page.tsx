@@ -2,7 +2,6 @@
 
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import Snowfall from '../components/Snowfall'
 import Link from 'next/link'
 import { days } from '../constant/challengeDays'
 
@@ -11,7 +10,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Snowfall />
       <Navbar />
 
       <section className="flex flex-col items-center text-center mt-20 px-6">
@@ -30,7 +28,6 @@ export default function LandingPage() {
           Enter the Magic Hub
         </Link>
       </section>
-
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-20 max-w-5xl mx-auto">
         {Array.from({ length: 22 }).map((_, i) => {
           const dayNumber = i + 1
