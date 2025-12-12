@@ -15,7 +15,7 @@ export default function SantaTrackerPage() {
           Back
         </Link>
       </div>
-      <h1 className="text-4xl font-bold text-white mb-4 item-center justify-center">
+      <h1 className="text-4xl font-bold text-white mb-4 flex items-center justify-center">
         🎅 Santa Tracker Animation
       </h1>
       <p className="text-gray-300 mb-10 font-medium">
