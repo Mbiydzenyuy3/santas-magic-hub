@@ -1,6 +1,15 @@
 'use client'
 import { snowShapes } from '@/lib/snowShapes'
 
+type ControlsPanelProps = {
+  speed: number
+  density: number
+  shape: string
+  onSpeedChange: (value: number) => void
+  onDensityChange: (value: number) => void
+  onShapeChange: (value: string) => void
+}
+
 export default function ControlsPanel({
   speed,
   density,
@@ -8,8 +17,7 @@ export default function ControlsPanel({
   onSpeedChange,
   onDensityChange,
   onShapeChange
-}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
-any) {
+}: ControlsPanelProps) {
   return (
     <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-md space-y-4">
       {/* Snow Speed */}

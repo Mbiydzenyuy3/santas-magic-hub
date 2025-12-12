@@ -11,7 +11,8 @@ export default function SnowfallCustomizerPage() {
   const [shape, setShape] = useState('❄')
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
+    const parsed = JSON.parse(localStorage.getItem('completedDays') || '[]')
+    const stored: number[] = Array.isArray(parsed) ? parsed : []
     if (!stored.includes(10)) {
       localStorage.setItem('completedDays', JSON.stringify([...stored, 10]))
     }
