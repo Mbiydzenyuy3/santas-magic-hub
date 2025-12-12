@@ -29,8 +29,7 @@ export default function CustomSnowfall({
   shape
 }: CustomSnowfallProps) {
   const flakes = useMemo<Flake[]>(() => {
-    const random = createRandomGenerator(density * 1234567 + 89101112)
-
+    const random = createRandomGenerator(89101112)
     return Array.from({ length: density }, (_, i) => ({
       id: i,
       left: `${random() * 100}%`,

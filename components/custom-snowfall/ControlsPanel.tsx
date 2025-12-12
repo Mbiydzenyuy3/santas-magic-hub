@@ -20,10 +20,12 @@ export default function ControlsPanel({
 }: ControlsPanelProps) {
   return (
     <div className="bg-white/80 backdrop-blur p-4 rounded-xl shadow-md space-y-4">
-      {/* Snow Speed */}
       <div>
-        <label className="font-semibold">Snow Speed</label>
+        <label htmlFor="snow-speed" className="font-semibold">
+          Snow Speed
+        </label>
         <input
+          id="snow-speed"
           type="range"
           min="2"
           max="15"
@@ -33,10 +35,12 @@ export default function ControlsPanel({
         />
       </div>
 
-      {/* Snow Density */}
       <div>
-        <label className="font-semibold">Snow Density</label>
+        <label htmlFor="snow-density" className="font-semibold">
+          Snow Density
+        </label>
         <input
+          id="snow-density"
           type="range"
           min="20"
           max="200"
@@ -46,16 +50,18 @@ export default function ControlsPanel({
         />
       </div>
 
-      {/* Snow Shape */}
       <div>
-        <label className="font-semibold">Snowflake Shape</label>
+        <label htmlFor="snow-shape" className="font-semibold">
+          Snowflake Shape
+        </label>{' '}
         <select
+          id="snow-shape"
           value={shape}
           onChange={(e) => onShapeChange(e.target.value)}
           className="w-full p-2 border rounded"
         >
           {snowShapes.map((sh, i) => (
-            <option key={i} value={sh}>
+            <option key={`${sh}-${i}`} value={sh}>
               {sh}
             </option>
           ))}

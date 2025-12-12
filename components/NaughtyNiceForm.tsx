@@ -26,8 +26,9 @@ function LoadingSpinner() {
 
 export default function NaughtyNiceForm() {
   const [name, setName] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [result, setResult] = useState<any>(null)
+  const [result, setResult] = useState<{ label: string; score: number } | null>(
+    null
+  )
   const [loading, setLoading] = useState(false)
 
   const handleCheck = async () => {
