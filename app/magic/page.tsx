@@ -125,6 +125,17 @@ export default function MagicHub() {
             Day 10 unlocked
           </p>
         </Link>
+        <Link
+          href="/magic/santa-tracker"
+          className="p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300"
+        >
+          <div className="text-gray-900 font-semibold text-lg">
+            🎅✨ Santa Tracker Animation
+          </div>
+          <p className="text-xs text-gray-700 mt-2 font-medium">
+            Day 11 unlocked
+          </p>
+        </Link>
 
         <Link
           href="/magic/tree-decorator"
@@ -133,7 +144,7 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             🎄 Tree Decorator
           </div>
-          <p className="text-xs text-gray-700 mt-2 font-medium">Day 11</p>
+          <p className="text-xs text-gray-700 mt-2 font-medium">Day 12</p>
         </Link>
 
         <Link
@@ -143,7 +154,7 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             🍽️ Holiday Recipe Finder
           </div>
-          <p className="text-xs text-gray-700 mt-2 font-medium">Day 12</p>
+          <p className="text-xs text-gray-700 mt-2 font-medium">Day 13</p>
         </Link>
       </div>
     </div>

@@ -1,0 +1,20 @@
+export const santaCities = [
+  { name: 'Yaoundé 🇨🇲', x: 50, y: 45 },
+  { name: 'Douala 🇨🇲', x: 48, y: 50 },
+  { name: 'Bamenda 🇨🇲', x: 40, y: 35 },
+  { name: 'Buea 🇨🇲', x: 42, y: 55 },
+  { name: 'Limbe 🇨🇲', x: 40, y: 58 },
+  { name: 'Kumba 🇨🇲', x: 43, y: 60 },
+  { name: 'Bafoussam 🇨🇲', x: 45, y: 40 },
+  { name: 'Dschang 🇨🇲', x: 44, y: 42 },
+  { name: 'Ebolowa 🇨🇲', x: 52, y: 60 },
+  { name: 'Kribi 🇨🇲', x: 53, y: 70 },
+  { name: 'Bertoua 🇨🇲', x: 60, y: 50 },
+  { name: 'Ngaoundéré 🇨🇲', x: 58, y: 30 },
+  { name: 'Garoua 🇨🇲', x: 55, y: 20 },
+  { name: 'Maroua 🇨🇲', x: 65, y: 18 },
+  { name: 'Nkongsamba 🇨🇲', x: 46, y: 48 },
+  { name: 'Foumban 🇨🇲', x: 47, y: 38 },
+  { name: 'Kousseri 🇨🇲', x: 68, y: 15 },
+  { name: 'Mamfe 🇨🇲', x: 35, y: 55 }
+]
