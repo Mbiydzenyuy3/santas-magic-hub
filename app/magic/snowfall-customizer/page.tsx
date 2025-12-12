@@ -18,7 +18,7 @@ export default function SnowfallCustomizerPage() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative text-center">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 relative text-center bg-red-800">
       <div className="fixed inset-0 pointer-events-none z-0">
         <CustomSnowfall speed={speed} density={density} shape={shape} />
       </div>
@@ -34,8 +34,8 @@ export default function SnowfallCustomizerPage() {
         </Link>
       </div>
 
-      <h1 className="text-3xl font-bold text-red-600 mb-6">
-        ❄️ Snowfall Customizer 🎄
+      <h1 className="text-3xl font-bold text-white mb-6">
+        ❄️ Snowfall Customizer
       </h1>
 
       <ControlsPanel

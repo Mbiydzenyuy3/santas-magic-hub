@@ -44,7 +44,7 @@ export default function CustomSnowfall({
       {flakes.map((f) => (
         <div
           key={f.id}
-          className="absolute animate-snow"
+          className="absolute animate-snow text-white"
           style={{
             left: f.left,
             fontSize: f.size,

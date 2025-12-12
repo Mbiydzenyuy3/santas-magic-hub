@@ -21,7 +21,7 @@ any) {
           max="15"
           value={speed}
           onChange={(e) => onSpeedChange(Number(e.target.value))}
-          className="w-full"
+          className="w-full border"
         />
       </div>
 
