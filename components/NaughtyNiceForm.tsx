@@ -52,7 +52,11 @@ export default function NaughtyNiceForm() {
         🎅 Naughty or Nice Meter
       </h1>
 
+      <label htmlFor="name-input" className="sr-only">
+        Your name
+      </label>
       <input
+        id="name-input"
         className="w-full p-3 border rounded-lg mb-4 focus:ring-2 focus:ring-red-500 disabled:opacity-50"
         placeholder="Enter your name..."
         value={name}
