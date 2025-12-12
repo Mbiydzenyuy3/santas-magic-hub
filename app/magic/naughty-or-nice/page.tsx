@@ -7,8 +7,9 @@ import Link from 'next/link'
 export default function NaughtyOrNicePage() {
   useEffect(() => {
     try {
-      const stored = JSON.parse(localStorage.getItem('completedDays') || '[]')
-      if (!stored.includes(8)) {
+      const parsed = JSON.parse(localStorage.getItem('completedDays') || '[]')
+      const stored: number[] = Array.isArray(parsed) ? parsed : []
+      if (!stored.includes(9)) {
         localStorage.setItem('completedDays', JSON.stringify([...stored, 9]))
       }
     } catch {}

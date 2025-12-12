@@ -133,7 +133,7 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             🎄 Tree Decorator
           </div>
-          <p className="text-xs text-gray-700 mt-2 font-medium">Day 9</p>
+          <p className="text-xs text-gray-700 mt-2 font-medium">Day 11</p>
         </Link>
 
         <Link
@@ -143,7 +143,7 @@ export default function MagicHub() {
           <div className="text-gray-900 font-semibold text-lg">
             🍽️ Holiday Recipe Finder
           </div>
-          <p className="text-xs text-gray-700 mt-2 font-medium">Day 10</p>
+          <p className="text-xs text-gray-700 mt-2 font-medium">Day 12</p>
         </Link>
       </div>
     </div>
