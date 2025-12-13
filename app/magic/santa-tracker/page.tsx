@@ -16,7 +16,7 @@ export default function SantaTrackerPage() {
         </Link>
       </div>
       <h1 className="text-4xl font-bold text-white mb-4 flex items-center justify-center">
-        🎅 Santa Tracker Animation
+        🎅 Santa Tracker
       </h1>
       <p className="text-gray-300 mb-10 font-medium">
         Watch Santa fly from city to city delivering joy
