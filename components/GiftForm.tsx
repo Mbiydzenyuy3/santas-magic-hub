@@ -12,14 +12,9 @@ interface Props {
 }
 
 const relationshipOptions = [
-  { value: "child", label: " Child (0-12 years)" },
-  { value: "teen", label: " Teen (13-17 years)" },
   { value: "friend", label: "Friend" },
-  { value: "sibling", label: " Sibling" },
-  { value: "parent", label: "Parent" },
   { value: "partner", label: "Partner/Spouse" },
-  { value: "colleague", label: "Colleague" },
-  { value: "grandparent", label: "Grandparent" }
+  { value: "other", label: "Other" }
 ];
 
 const personalityOptions: {
@@ -91,8 +86,6 @@ export default function GiftForm({ onSubmit }: Props) {
     }
 
     setIsSubmitting(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
 
     onSubmit({
       age,

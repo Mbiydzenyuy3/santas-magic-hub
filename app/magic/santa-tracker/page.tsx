@@ -5,10 +5,14 @@ import { useEffect } from "react";
 
 export default function SantaTrackerPage() {
   useEffect(() => {
-    const parsed = JSON.parse(localStorage.getItem("completedDays") || "[]");
-    const stored: number[] = Array.isArray(parsed) ? parsed : [];
-    if (!stored.includes(11)) {
-      localStorage.setItem("completedDays", JSON.stringify([...stored, 11]));
+    try {
+      const parsed = JSON.parse(localStorage.getItem("completedDays") || "[]");
+      const stored: number[] = Array.isArray(parsed) ? parsed : [];
+      if (!stored.includes(11)) {
+        localStorage.setItem("completedDays", JSON.stringify([...stored, 11]));
+      }
+    } catch (error) {
+      console.error("Error updating completedDays in localStorage", error);
     }
   }, []);
 

@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import GiftForm from "@/components/GiftForm";
 import GiftResults from "@/components/GiftResults";
 import { getGiftRecommendations } from "@/lib/giftRules";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function GiftRecommenderPage() {
