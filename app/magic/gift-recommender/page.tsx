@@ -1,14 +1,20 @@
 "use client";
-import SantaTracker from "@/components/SantaTracker";
-import Link from "next/link";
-import { useEffect } from "react";
 
-export default function SantaTrackerPage() {
+import { useState } from "react";
+import GiftForm from "@/components/GiftForm";
+import GiftResults from "@/components/GiftResults";
+import { getGiftRecommendations } from "@/lib/giftRules";
+import { useEffect } from "react";
+import Link from "next/link";
+
+export default function GiftRecommenderPage() {
+  const [gifts, setGifts] = useState<string[]>([]);
+
   useEffect(() => {
     const parsed = JSON.parse(localStorage.getItem("completedDays") || "[]");
     const stored: number[] = Array.isArray(parsed) ? parsed : [];
-    if (!stored.includes(11)) {
-      localStorage.setItem("completedDays", JSON.stringify([...stored, 11]));
+    if (!stored.includes(12)) {
+      localStorage.setItem("completedDays", JSON.stringify([...stored, 12]));
     }
   }, []);
 
@@ -25,14 +31,19 @@ export default function SantaTrackerPage() {
           Back
         </Link>
       </div>
-      <h1 className='text-4xl font-bold text-white mb-4 flex items-center justify-center'>
-        🎅 Santa Tracker
-      </h1>
-      <p className='text-gray-300 mb-10 font-medium'>
-        Watch Santa fly from city to city delivering joy
+      <h1 className='text-3xl font-bold mb-4'>Christmas Gift Recommender</h1>
+      <p className='mb-8 text-gray-300'>
+        Tell us about your friend and we’ll suggest the perfect gifts.
       </p>
 
-      <SantaTracker />
+      <GiftForm
+        onSubmit={(data) => {
+          const results = getGiftRecommendations(data);
+          setGifts(results);
+        }}
+      />
+
+      {gifts.length > 0 && <GiftResults gifts={gifts} />}
     </div>
   );
 }
