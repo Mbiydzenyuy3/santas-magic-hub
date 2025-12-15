@@ -16,8 +16,7 @@ export function getGiftRecommendations({
   if (age < 13 && relationship !== "child" && relationship !== "teen") {
     selectedCategories.push("Kids");
   }
-  // Add relationship-based categories
-  if (relationship === "partner") selectedCategories.push("Fashion");
+   if (relationship === "partner") selectedCategories.push("Fashion");
   if (relationship === "friend") selectedCategories.push("Experience");
   if (relationship === "child" || relationship === "teen")
     selectedCategories.push("Kids");
@@ -26,7 +25,6 @@ export function getGiftRecommendations({
   if (relationship === "colleague") selectedCategories.push("Tech");
   if (relationship === "sibling") selectedCategories.push("Fun");
 
-  // Remove duplicates and ensure we have at least one category
   const uniqueCategories = [...new Set(selectedCategories)];
 
   if (uniqueCategories.length === 0) {
