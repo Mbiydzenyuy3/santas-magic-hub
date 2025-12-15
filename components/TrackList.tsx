@@ -11,9 +11,10 @@ export default function TrackList({
         <button
           key={index}
           onClick={() => onSelect(index)}
-          className='w-full text-left p-3 rounded-lg border hover:bg-green-50 transition'
+          className='w-full text-left p-3 rounded-lg border border-gray-400 hover:bg-green-50 transition'
         >
-          🎵 <strong>{track.title}</strong> — {track.artist}
+          🎵 <strong className='text-gray-700'>{track.title}</strong> —{" "}
+          {track.artist}
         </button>
       ))}
     </div>
