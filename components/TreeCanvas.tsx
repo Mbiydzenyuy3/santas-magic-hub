@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 interface PlacedOrnament {
+  id: string;
   emoji: string;
   x: number;
   y: number;
@@ -14,11 +15,17 @@ export default function TreeCanvas() {
   function handleDrop(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     const emoji = e.dataTransfer.getData("text/plain");
+
+    if (!emoji || emoji.length > 10) {
+      return;
+    }
+
     const rect = e.currentTarget.getBoundingClientRect();
 
     setPlaced((prev) => [
       ...prev,
       {
+        id: `${Date.now()}-${Math.random()}`,
         emoji,
         x: e.clientX - rect.left,
         y: e.clientY - rect.top
@@ -36,9 +43,9 @@ export default function TreeCanvas() {
       <div className='text-9xl select-none'>🎄</div>
 
       {/* Ornaments */}
-      {placed.map((o, i) => (
+      {placed.map((o) => (
         <span
-          key={i}
+          key={o.id}
           className='absolute text-2xl'
           style={{ left: o.x, top: o.y }}
         >

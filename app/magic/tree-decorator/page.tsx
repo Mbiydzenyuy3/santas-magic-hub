@@ -8,10 +8,18 @@ import RealSnowfall from "@/components/Snow";
 
 export default function TreeDecoratorPage() {
   useEffect(() => {
-    const parsed = JSON.parse(localStorage.getItem("completedDays") || "[]");
-    const stored: number[] = Array.isArray(parsed) ? parsed : [];
-    if (!stored.includes(14)) {
-      localStorage.setItem("completedDays", JSON.stringify([...stored, 14]));
+    try {
+      if (typeof window === "undefined" || !window.localStorage) {
+        return;
+      }
+
+      const parsed = JSON.parse(localStorage.getItem("completedDays") || "[]");
+      const stored: number[] = Array.isArray(parsed) ? parsed : [];
+      if (!stored.includes(14)) {
+        localStorage.setItem("completedDays", JSON.stringify([...stored, 14]));
+      }
+    } catch (error) {
+      console.error("Failed to update completed days:", error);
     }
   }, []);
 
