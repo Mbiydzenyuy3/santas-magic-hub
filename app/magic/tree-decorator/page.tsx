@@ -4,7 +4,7 @@ import OrnamentPalette from "@/components/OrnamentPalette";
 import TreeCanvas from "@/components/TreeCanvas";
 import Link from "next/link";
 import { useEffect } from "react";
-// import  RealSnowfall from "@/components/RealSnowfall";
+import RealSnowfall from "@/components/Snow";
 
 export default function TreeDecoratorPage() {
   useEffect(() => {
@@ -17,9 +17,9 @@ export default function TreeDecoratorPage() {
 
   return (
     <div className='min-h-screen relative bg-gradient-to-b from-red-600 via-red-700 to-red-800 text-white overflow-hidden selection:bg-yellow-200 selection:text-red-900 p-6 flex flex-col items-center py-16 px-6'>
-       {/* <div className="fixed inset-0 pointer-events-none z-0">
-              <RealSnowfall />
-            </div> */}
+      <div className='fixed inset-0 pointer-events-none z-0'>
+        <RealSnowfall />
+      </div>
       <div className='absolute top-6 left-6 z-20'>
         <Link
           href='/magic'
