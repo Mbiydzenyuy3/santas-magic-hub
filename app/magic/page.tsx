@@ -159,13 +159,15 @@ export default function MagicHub() {
           </p>
         </Link>
         <Link
-          href='/magic/christmas-special'
+          href='/magic/tree-decorator'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
         >
           <div className='text-gray-900 font-semibold text-lg'>
-            🎄 Christmas Special
+            🎄 Tree Decorator
           </div>
-          <p className='text-xs text-gray-700 mt-2 font-medium'>Day 14</p>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 14 unlocked
+          </p>
         </Link>
 
         <Link
