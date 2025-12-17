@@ -177,7 +177,9 @@ export default function MagicHub() {
           <div className='text-gray-900 font-semibold text-lg'>
             ⛄ Build-Your-Snowman
           </div>
-          <p className='text-xs text-gray-700 mt-2 font-medium'>Day 15</p>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 15 unlocked
+          </p>
         </Link>
 
         <Link
