@@ -13,7 +13,7 @@ export const days = [
   { day: 12, name: "Gift Recommendation Engine", live: true },
   { day: 13, name: "Christmas Music Player", live: true },
   { day: 14, name: "Christmas Tree Decorator", live: true },
-  { day: 15, name: "Build-Your-Snowman Mini App", live: false },
+  { day: 15, name: "Build-Your-Snowman Mini App", live: true },
   { day: 16, name: "Secret Santa Randomizer", live: false },
   { day: 17, name: "Christmas Quiz Game", live: false },
   { day: 18, name: "Holiday To-Do List", live: false },
