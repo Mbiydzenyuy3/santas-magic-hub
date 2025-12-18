@@ -6,7 +6,7 @@ export default function MagicHub() {
       <div className='top-0 left-8 p-4 absolute'>
         <Link
           href='/'
-          className='inline-flex items-center gap-2 px-4 py-2 bg-red-200 hover:bg-red-100 text-gray-700 rounded-lg transition-colors duration-200 font-medium'
+          className='inline-flex items-center gap-2 px-4 py-2 bg-red-800 backdrop-blur-md hover:bg-red-700 border border-white/20 text-white rounded-full transition-all duration-300 font-medium group shadow-lg'
         >
           <span>←</span>
           Back to Home
@@ -187,9 +187,11 @@ export default function MagicHub() {
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
         >
           <div className='text-gray-900 font-semibold text-lg'>
-            🤫 Secret Santa Randomizer
+            🤫 Secret Santa
           </div>
-          <p className='text-xs text-gray-700 mt-2 font-medium'>Day 16</p>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 16 unlocked
+          </p>
         </Link>
 
         <Link
