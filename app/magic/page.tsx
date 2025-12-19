@@ -201,7 +201,9 @@ export default function MagicHub() {
           <div className='text-gray-900 font-semibold text-lg'>
             🧠 Christmas Quiz Game
           </div>
-          <p className='text-xs text-gray-700 mt-2 font-medium'>Day 17</p>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 17 unlock
+          </p>
         </Link>
         <Link
           href='/magic/holiday-todo'
