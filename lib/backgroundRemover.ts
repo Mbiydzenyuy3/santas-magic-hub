@@ -13,7 +13,7 @@ export function removeBackgroundByColor(
   imageData: ImageData,
   options: RemoveColorOptions
 ): ImageData {
-  const { removeColor, edgeThreshold, tolerance = 30 } = options;
+  const { removeColor, tolerance = 30 } = options;
 
   // Parse the remove color
   const targetColor = hexToRgb(removeColor);
@@ -66,7 +66,7 @@ export function removeBackgroundByEdges(
       // If edge magnitude is below threshold, it's likely background
       if (magnitude < edgeThreshold) {
         // Check if this pixel is surrounded by similar colors (likely background)
-        if (isBackgroundPixel(data, x, y, width, edgeThreshold)) {
+        if (isBackgroundPixel(data, x, y, width, height, edgeThreshold)) {
           data[idx + 3] = 0; // Make transparent
         }
       }
@@ -149,6 +149,7 @@ function isBackgroundPixel(
   data: Uint8ClampedArray,
   x: number,
   y: number,
+  height: number,
   width: number,
   threshold: number
 ): boolean {
@@ -167,7 +168,7 @@ function isBackgroundPixel(
       const checkX = x + dx;
       const checkY = y + dy;
 
-      if (checkX >= 0 && checkX < width && checkY >= 0) {
+      if (checkX >= 0 && checkX < width && checkY >= 0 && checkY < height) {
         const checkIdx = (checkY * width + checkX) * 4;
         const checkGray =
           (data[checkIdx] + data[checkIdx + 1] + data[checkIdx + 2]) / 3;
@@ -193,10 +194,11 @@ export function createCheckerboardBackground(
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext("2d")!;
-
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    throw new Error("Failed to get canvas 2D context");
+  }
   const tileSize = 20;
-
   for (let y = 0; y < height; y += tileSize) {
     for (let x = 0; x < width; x += tileSize) {
       const isDark = (x / tileSize + y / tileSize) % 2 === 0;
@@ -204,6 +206,5 @@ export function createCheckerboardBackground(
       ctx.fillRect(x, y, tileSize, tileSize);
     }
   }
-
   return ctx.getImageData(0, 0, width, height);
 }

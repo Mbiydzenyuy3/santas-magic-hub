@@ -16,8 +16,10 @@ export default function PhotoEditor({
   });
 
   useEffect(() => {
+    let isMounted = true;
     const img = document.createElement("img");
     img.onload = () => {
+      if (!isMounted) return;
       const aspectRatio = img.width / img.height;
 
       const maxWidth = 400;
@@ -36,7 +38,15 @@ export default function PhotoEditor({
         height: Math.round(height)
       });
     };
+
+    img.onerror = () => {
+      console.error("Failed to load image for dimension calculation");
+    };
+
     img.src = image;
+    return () => {
+      isMounted = false;
+    };
   }, [image]);
 
   // TODO: Future 3D effects implementation

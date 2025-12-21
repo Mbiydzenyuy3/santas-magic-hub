@@ -11,6 +11,9 @@ export default function PhotoUploader({
 
     const reader = new FileReader();
     reader.onload = () => onUpload(reader.result as string);
+    reader.onerror = () => {
+      console.error("Failed to read file");
+    };
     reader.readAsDataURL(file);
   };
 

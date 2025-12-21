@@ -33,7 +33,7 @@ export default function HolidayTodo() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder='Add a holiday task...'
-          className='flex-1 p-3 rounded-lg border border-gray-200 text-gray-200'
+          className='flex-1 p-3 rounded-lg border border-gray-200 text-gray-900 bg-white'
         />
         <button
           onClick={addTask}
