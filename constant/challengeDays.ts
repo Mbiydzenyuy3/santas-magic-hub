@@ -17,7 +17,7 @@ export const days = [
   { day: 16, name: "Secret Santa", live: true },
   { day: 17, name: "Christmas Quiz Game", live: true },
   { day: 18, name: "Holiday To-Do List", live: true },
-  { day: 19, name: "Christmas Photo Filters", live: false },
+  { day: 19, name: "Photo Filters", live: true },
   { day: 20, name: "Christmas Color Palette Generator", live: false },
   { day: 21, name: "Christmas E-Card Sharing", live: false },
   { day: 22, name: "Final Polish + Magic Reveal", live: false },

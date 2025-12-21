@@ -216,6 +216,17 @@ export default function MagicHub() {
             Day 18 unlocked
           </p>
         </Link>
+        <Link
+          href='/magic/photo-filters'
+          className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
+        >
+          <div className='text-gray-900 font-semibold text-lg'>
+            📸 Photo Filter
+          </div>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 19 unlocked
+          </p>
+        </Link>
       </div>
     </div>
   );
