@@ -31,7 +31,6 @@ export default function MagicHub() {
             Day 2 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/countdown'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -54,7 +53,6 @@ export default function MagicHub() {
             Day 4 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/jokes'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -66,7 +64,6 @@ export default function MagicHub() {
             Day 5 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/elf-name'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -78,7 +75,6 @@ export default function MagicHub() {
             Day 6 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/greeting-cards'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -101,7 +97,6 @@ export default function MagicHub() {
             Day 8 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/naughty-or-nice'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -113,7 +108,6 @@ export default function MagicHub() {
             Day 9 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/snowfall-customizer'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -169,7 +163,6 @@ export default function MagicHub() {
             Day 14 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/snowman-builder'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -181,7 +174,6 @@ export default function MagicHub() {
             Day 15 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/secret-santa'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -193,7 +185,6 @@ export default function MagicHub() {
             Day 16 unlocked
           </p>
         </Link>
-
         <Link
           href='/magic/christmas-quiz'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -225,6 +216,17 @@ export default function MagicHub() {
           </div>
           <p className='text-xs text-gray-700 mt-2 font-medium'>
             Day 19 unlocked
+          </p>
+        </Link>
+        <Link
+          href='/magic/color-palette'
+          className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
+        >
+          <div className='text-gray-900 font-semibold text-lg'>
+            🎨 Color Palette Generator{" "}
+          </div>
+          <p className='text-xs text-gray-700 mt-2 font-medium'>
+            Day 20 unlocked
           </p>
         </Link>
       </div>
