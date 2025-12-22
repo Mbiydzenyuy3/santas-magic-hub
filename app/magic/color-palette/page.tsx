@@ -26,7 +26,7 @@ export default function ColorPalettePage() {
       <div className='absolute top-6 left-6 z-20'>
         <Link
           href='/magic'
-          className='inline-flex items-center gap-2 px-4 py-2 bg-red-800 backdrop-blur-md hover:bg-white/20 border border-white/20 text-white rounded-full transition-all duration-300 font-medium group shadow-lg'
+          className='inline-flex items-center gap-2 px-4 py-2 bg-red-800 backdrop-blur-md hover:bg-red-700 border border-white/20 text-white rounded-full transition-all duration-300 font-medium group shadow-lg'
         >
           <span className='group-hover:-translate-x-1 transition-transform'>
             ←
