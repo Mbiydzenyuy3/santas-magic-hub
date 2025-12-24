@@ -1,20 +1,23 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
+import ClientLayout from "../components/ClientLayout";
 
 export const metadata: Metadata = {
-  title: 'Santa Magic',
+  title: "Santa Magic",
   description:
-    'A magical Santa-themed application with various holiday features'
-}
+    "A magical Santa-themed application with various holiday features"
+};
 
 export default function RootLayout({
   children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-white">{children}</body>
+    <html lang='en'>
+      <body>
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
-  )
+  );
 }
