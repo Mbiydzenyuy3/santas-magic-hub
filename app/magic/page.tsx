@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import ElfHover from "@/components/ElfHover";
+import { motion } from "framer-motion";
 
 export default function MagicHub() {
   return (
@@ -19,18 +23,40 @@ export default function MagicHub() {
         Explore the magical Christmas tools unlocked so far
       </p>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-        <Link
-          href='/magic/santa-chat'
-          className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
-        >
-          <div className='text-gray-900 font-semibold text-lg'>
-            🎅 Santa Chat
-          </div>
-          <p className='text-xs text-gray-700 mt-2 font-medium'>
-            Day 2 unlocked
-          </p>
-        </Link>
+      <motion.div
+        className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+        initial='hidden'
+        animate='visible'
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.1
+            }
+          }
+        }}
+      >
+        <ElfHover>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+          >
+            <Link
+              href='/magic/santa-chat'
+              className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
+            >
+              <div className='text-gray-900 font-semibold text-lg'>
+                🎅 Santa Chat
+              </div>
+              <p className='text-xs text-gray-700 mt-2 font-medium'>
+                Day 2 unlocked
+              </p>
+            </Link>
+          </motion.div>
+        </ElfHover>
         <Link
           href='/magic/countdown'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -86,6 +112,7 @@ export default function MagicHub() {
             Day 7 unlocked
           </p>
         </Link>
+
         <Link
           href='/magic/story-teller'
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
@@ -102,7 +129,7 @@ export default function MagicHub() {
           className='p-5 rounded-xl shadow-lg hover:shadow-xl bg-white border border-gray-200 transition-all duration-200 hover:border-green-300'
         >
           <div className='text-gray-900 font-semibold text-lg'>
-            ⭐⭐⭐ Santa’s Names Rating Tool
+            ⭐ Santa’s Names Rating Tool
           </div>
           <p className='text-xs text-gray-700 mt-2 font-medium'>
             Day 9 unlocked
@@ -240,7 +267,7 @@ export default function MagicHub() {
             Day 21 unlocked
           </p>
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -20,6 +20,6 @@ export const days = [
   { day: 19, name: "Photo Filters", live: true },
   { day: 20, name: "Christmas Color Palette Generator", live: true },
   { day: 21, name: "Christmas E-Card Sharing", live: true },
-  { day: 22, name: "Final Polish + Magic Reveal", live: false },
+  { day: 22, name: "Final Polish + Magic Reveal", live: true },
   { day: 23, name: "GRAND CHRISTMAS DAY POST", live: false }
 ];
